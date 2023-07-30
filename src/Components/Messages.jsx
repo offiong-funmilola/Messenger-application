@@ -9,7 +9,7 @@ function Messages({message}) {
     
     return (
         <>
-            <div key={message.id} className={`w-5/6 md:w-2/5 ${apply ? 'sent self-end' : 'received self-start'}`}>
+            <div key={message.id} className={`w-5/6 md:w-2/3 ${apply ? 'sent self-end' : 'received self-start'}`}>
                 <div className={`absolute w-5 h-5 rounded-full translate-x-2 translate-y-2 z-10 ${apply? 'left-[-15px] top-[-15px]': 'right-0 bottom-0'}`}>
                     <img src={message.photoURL} alt='' className='w-full h-full rounded-full'></img>
                 </div>

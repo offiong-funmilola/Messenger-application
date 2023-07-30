@@ -1,12 +1,15 @@
 import React from 'react'
 import {MdSend} from "react-icons/md"
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import {db, auth} from '../Config/firebase'
 import { collection, addDoc, serverTimestamp } from "firebase/firestore"; 
+import MessengerContext from '../Context/MessengerContext';
 
 
 function Footer() {
     const [currentMessage, setCurrentMessage] = useState('')
+    const {receiverUid} = useContext(MessengerContext)
+    
     const handleSubmit = async (e) => {
         e.preventDefault()
         const {uid, displayName, photoURL} = auth.currentUser
@@ -14,9 +17,10 @@ function Footer() {
             return
         }
         await addDoc(collection(db, "messages"), {
-            uid,
             name: displayName,
             text: currentMessage,
+            sender: uid,
+            receiver: receiverUid,
             photoURL: photoURL,
             timestamp: serverTimestamp()
         });
