@@ -3,26 +3,26 @@ import { useContext } from 'react'
 import MessengerContext from '../Context/MessengerContext'
 
 function Users({user, index}) {
-    const {setReceiver} = useContext(MessengerContext)
+    const {setReceiver, receiver, countUnreadMessages, formatTextDisplay, formatDateDisplay} = useContext(MessengerContext)
 
-    const handleClick = (e) => {
+    const handleClick = () => {
         setReceiver(user)
     }
 
     return (
-        <div key={index} className={`w-full h-14 flex items-center justify-between px-2 bg-gray-400 cursor-pointer active:bg-gray-200`} onClick={handleClick}>
+        <div key={index} className={`w-full flex items-center justify-between py-4 px-2 bg-white cursor-pointer active:bg-gray-200 ${receiver && user.id === receiver.id ? 'current-chat' : 'other-chat'}`} onClick={handleClick}>
             <div className='flex w-3/4 gap-2 items-center'>
                 <div className='w-10 h-10 rounded-full'>
                     <img src={user.photoURL} alt={user.name} className='w-full h-full rounded-full'></img>
                 </div>
                 <div>
                     <p>{user.name}</p>
-                    <p>Mess</p>
+                    <p>{formatTextDisplay(user.latestMessage.text)}</p>
                 </div>
             </div>
-            <div>
-                <p>Time</p>
-                <p></p>
+            <div className='relative p-5'>
+                <p className='absolute top-[-5px] right-5 badge'>{countUnreadMessages(user.id)}</p>
+                <p className='absolute bottom-0 right-3 text-xs'>{formatDateDisplay(user.latestMessage.timestamp)}</p>
             </div>
         </div>
     )

@@ -10,7 +10,7 @@ function App() {
       <MessengerProvider>
         <Router>
           <Routes>
-            <Route path='/' element={<SignIn/>}/>
+            <Route path='/' element={<SignIn />}/>
             <Route path='/chat' element={
               <Protected>
                 <Chat/>

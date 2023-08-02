@@ -7,7 +7,7 @@ import MessengerContext from '../Context/MessengerContext';
 
 function MessageForm() {
     const [currentMessage, setCurrentMessage] = useState('')
-    const {receiver, setTriggerUpdate, scrollToBottom} = useContext(MessengerContext)
+    const {receiver, scrollToBottom} = useContext(MessengerContext)
     
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -29,7 +29,6 @@ function MessageForm() {
             timestamp: serverTimestamp()
         });
         setCurrentMessage('')
-        setTriggerUpdate(true)
         scrollToBottom()
     }
 
@@ -38,7 +37,7 @@ function MessageForm() {
     }, [scrollToBottom])
 
     return (
-        <div className='w-full h-[12vh] bg-gray-300 flex items-center justify-end p-5 md:p-10 self-end absolute left-0 bottom-0'>
+        <div className='w-full bg-gray-300 flex items-center justify-end p-3 md:p-5 self-end absolute left-0 bottom-0'>
             <form onSubmit={handleSubmit} className='w-full bg-white flex justify-between rounded-lg'>
                 <input type='text' value={currentMessage} onChange={(e)=> {setCurrentMessage(e.target.value)}} className='w-3/4 py-3 px-5 focus:outline-none rounded-lg' placeholder='Type a message' />
                     <button type='submit' className='w-7'><MdSend className='text-xl'/></button> 

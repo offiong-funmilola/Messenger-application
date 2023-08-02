@@ -3,7 +3,7 @@ import {useContext} from 'react'
 import MessengerContext from '../Context/MessengerContext'
 
 function Messages({message: {id, name, sender, text, timestamp, photoURL}}) {
-    const {user} = useContext(MessengerContext)
+    const {user, formatDateDisplay} = useContext(MessengerContext)
     const isOutgoingMessage = user.uid === sender
 
     return (
@@ -15,7 +15,7 @@ function Messages({message: {id, name, sender, text, timestamp, photoURL}}) {
                 <div className='static mb-3 px-4 py-2'>
                     <p className="text-xs">{name}</p>
                     <p className='text-lg'>{text}</p>
-                    <p className='absolute bottom-0 right-5 text-xs'>{new Date(timestamp?.seconds * 1000).toLocaleTimeString()}</p>
+                    <p className='absolute bottom-0 right-5 text-xs'>{formatDateDisplay(timestamp)}</p>
                 </div>
             </div>
         </>
