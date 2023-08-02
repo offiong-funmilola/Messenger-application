@@ -32,6 +32,10 @@ code {
   float: right;
   margin-bottom: 1rem;
 }
+.scroll-element {
+  position: relative;
+  float: left;
+}
 
 /* relative shadow-lg border-2 mb-2  */
 /* border: 2px solid gray; */

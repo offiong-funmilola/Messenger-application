@@ -1,9 +1,6 @@
 import React from 'react'
 import Header from './Header'
 import Main from './Main'
-import Footer from './Footer'
-
-
 
 function Chat() {
     // const scroll = useRef()
@@ -11,7 +8,6 @@ function Chat() {
     <div>
       <Header/>
       <Main/>
-      <Footer/>
       {/* <span ref={scroll}></span> */}
     </div>
   )
