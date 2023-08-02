@@ -32,6 +32,26 @@ code {
   float: right;
   margin-bottom: 1rem;
 }
+.scroll-element {
+  position: relative;
+  float: left;
+}
+.current-chat, .other-chat:hover {
+  background-color: #ededed;
+}
+.badge {
+  border-radius: 50%;
+  background-color: rgb(85, 59, 250);
+  padding: 3px;
+  text-align: center;
+  min-width: 30px;
+  height: auto;
+  color: #fff;
+  font-weight: bold;
+}
+.badge:empty {
+  display: none;
+}
 
 /* relative shadow-lg border-2 mb-2  */
 /* border: 2px solid gray; */
