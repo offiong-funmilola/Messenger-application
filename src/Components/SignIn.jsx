@@ -40,7 +40,8 @@ function SignIn() {
         if (user) {
             navigate('/chat')
         }
-    })
+        
+    },[user])
 
     return (
         <div className='w-full h-screen flex items-center justify-center'>

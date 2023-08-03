@@ -47,6 +47,10 @@ export const MessengerProvider = ({children}) => {
         return unsubscribe
     }, [user])
 
+    useEffect(()=> {
+        localStorage.setItem('user', JSON.stringify(user))
+    }, [user])
+
     const scrollToBottom = () => {
         setTimeout(() => {
             if (scrollElement.current) {
