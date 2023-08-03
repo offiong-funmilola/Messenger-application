@@ -42,8 +42,8 @@ function SignIn() {
     useEffect(() => {
         if (user) {
             navigate('/')
-            setLoading(false)
         }
+        setLoading(false)
     })
 
     return (
