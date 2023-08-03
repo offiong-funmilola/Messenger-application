@@ -7,11 +7,12 @@ import MessageForm from './MessageForm'
 import {MdArrowBackIosNew} from 'react-icons/md'
 import {useAuthState} from 'react-firebase-hooks/auth'
 import { useNavigate } from 'react-router-dom'
+import Loading from './Loading'
 
 function Main() {
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
-  const {messages, users, loading, setLoading, filterMessagesForReceiver, sortUsersByLatestMessage, updateUsersWithLatestMessage, updateUnreadMessages, user: currentUser, receiver, setReceiver, setMessages, scrollElement} = useContext(MessengerContext)
+  const {messages, users, loading, filterMessagesForReceiver, sortUsersByLatestMessage, updateUsersWithLatestMessage, updateUnreadMessages, user: currentUser, receiver, setReceiver, setMessages, scrollElement} = useContext(MessengerContext)
   const messageWithCurrentUser = receiver ? messages.filter((message) => filterMessagesForReceiver(message, receiver.id)) : []
   const noMessages = messageWithCurrentUser.length === 0
  
@@ -24,15 +25,18 @@ function Main() {
     if (!user) {
       navigate('/login')
     }
-    setLoading(false)
+  })
+
+  useEffect(() => {
+    window.onpopstate = () => {
+      setReceiver(null)
+    }
   })
 
   return (
     <>
-      {loading && 
-        <div className="loader-container">
-            <div className="spinner"></div>
-        </div>  
+      {loading &&
+        <Loading />
       }
       {!loading &&
         <div className={`overflow-scroll w-full md:h-[88vh] grid grid-rows-1 grid-cols-1 md:grid-cols-3 ${receiver ? 'h-[100vh]' : ''}`}>

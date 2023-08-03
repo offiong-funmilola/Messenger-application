@@ -1,16 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { GoogleAuthProvider, signInWithPopup  } from "firebase/auth";
 import {useAuthState} from 'react-firebase-hooks/auth'
 import {db, auth} from '../Config/firebase'
 import { useNavigate } from 'react-router-dom'
 import GoogleButton from 'react-google-button'
 import {collection, query, doc, setDoc, getDocs, where} from 'firebase/firestore'
+import MessengerContext from '../Context/MessengerContext'
+import Loading from './Loading';
 
 function SignIn() {
     const provider = new GoogleAuthProvider();
     const navigate = useNavigate();
     const [user] = useAuthState(auth);
-        
+    const {loading, setLoading} = useContext(MessengerContext)
+
     const signInWithGoogle = () => {
         signInWithPopup(auth, provider)
         .then(result => {
@@ -39,15 +42,23 @@ function SignIn() {
     useEffect(() => {
         if (user) {
             navigate('/')
+            setLoading(false)
         }
     })
 
     return (
-        <div className='w-full h-screen flex items-center justify-center'>
-            <div className='w-1/2 h-20 flex items-center justify-center'>
-                <GoogleButton onClick={signInWithGoogle}/>
-            </div>
-        </div>
+        <>
+            {loading && 
+                <Loading />
+            }
+            {!loading &&
+                <div className='w-full h-screen flex items-center justify-center'>
+                    <div className='w-1/2 h-20 flex items-center justify-center'>
+                        <GoogleButton onClick={signInWithGoogle}/>
+                    </div>
+                </div>        
+            }
+        </>
     )
 }
 
