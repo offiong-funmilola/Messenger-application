@@ -10,8 +10,10 @@ export const MessengerProvider = ({children}) => {
     const [user] = useAuthState(auth);
     const [messages, setMessages] = useState([]);
     const [users, setUsers] = useState([])
-    const [receiver, setReceiver] = useState(null)
+    const [receiver, setReceiver] = useState(null);
+    const [loading, setLoading] = useState(true)
     const scrollElement = useRef()
+    const MAX_TEXT_LENGTH = 30
 
     useEffect(() => {
         if (user) {
@@ -45,10 +47,6 @@ export const MessengerProvider = ({children}) => {
             setUsers(usersList)
         });
         return unsubscribe
-    }, [user])
-
-    useEffect(()=> {
-        localStorage.setItem('user', JSON.stringify(user))
     }, [user])
 
     const scrollToBottom = () => {
@@ -98,7 +96,7 @@ export const MessengerProvider = ({children}) => {
 
     const formatTextDisplay = (text) => {
         if (!text) return ''
-        return text.length > 40 ? `${text.substring(0, 40)}...` : text;
+        return text.length > MAX_TEXT_LENGTH ? `${text.substring(0, MAX_TEXT_LENGTH)}...` : text;
     }
 
     const formatDateDisplay = (timestamp) => {
@@ -151,6 +149,8 @@ export const MessengerProvider = ({children}) => {
                 messages,
                 setUsers,
                 users,
+                loading,
+                setLoading,
                 receiver,
                 setReceiver,
                 setMessages,
@@ -163,7 +163,7 @@ export const MessengerProvider = ({children}) => {
                 formatDateDisplay,
                 updateUnreadMessages,
                 updateUsersWithLatestMessage,
-                sortUsersByLatestMessage
+                sortUsersByLatestMessage,
             }}
             >
             {children}

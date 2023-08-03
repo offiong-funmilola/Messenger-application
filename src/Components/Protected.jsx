@@ -5,8 +5,8 @@ import MessengerContext from '../Context/MessengerContext'
 
 function Protected({children}) {
     const {user} = useContext(MessengerContext)
-    if(!user){
-        return <Navigate to='/' />
+    if (!user) {
+        return <Navigate to='/login' />
     }
     else {
         return children

@@ -24,12 +24,12 @@ function SignIn() {
             getDocs(usersQuery).then((item) => {
                 const user = item.docs.length > 0 ? item.docs[0] : null
                 if (user) {
-                    navigate('/chat')
+                    navigate('/')
                 }
                 else{
                     const usersRef = doc(db, 'users', auth.currentUser.uid)
                     setDoc(usersRef, values, { merge: true })
-                    navigate('/chat') 
+                    navigate('/') 
                 }
             });
         })
@@ -38,10 +38,9 @@ function SignIn() {
 
     useEffect(() => {
         if (user) {
-            navigate('/chat')
+            navigate('/')
         }
-        
-    },[user])
+    },[user, navigate])
 
     return (
         <div className='w-full h-screen flex items-center justify-center'>

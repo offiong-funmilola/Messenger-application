@@ -38,9 +38,9 @@ function MessageForm() {
 
     return (
         <div className='w-full bg-gray-300 flex items-center justify-end p-3 md:p-5 self-end absolute left-0 bottom-0'>
-            <form onSubmit={handleSubmit} className='w-full bg-white flex justify-between rounded-lg'>
-                <input type='text' value={currentMessage} onChange={(e)=> {setCurrentMessage(e.target.value)}} className='w-3/4 py-3 px-5 focus:outline-none rounded-lg' placeholder='Type a message' />
-                    <button type='submit' className='w-7'><MdSend className='text-xl'/></button> 
+            <form onSubmit={handleSubmit} className='w-full bg-white rounded-lg relative'>
+                <input type='text' value={currentMessage} onChange={(e)=> {setCurrentMessage(e.target.value)}} className='w-full py-3 px-5 pr-10 focus:outline-none rounded-lg' placeholder='Type a message' />
+                <button type='submit' className='p-4 absolute right-0 top-0'><MdSend className='text-xl'/></button> 
             </form>   
         </div>
     )
