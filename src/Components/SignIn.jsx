@@ -40,7 +40,7 @@ function SignIn() {
         if (user) {
             navigate('/')
         }
-    },[user, navigate])
+    })
 
     return (
         <div className='w-full h-screen flex items-center justify-center'>

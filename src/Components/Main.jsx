@@ -25,7 +25,7 @@ function Main() {
       navigate('/login')
     }
     setLoading(false)
-  }, [user])
+  })
 
   return (
     <>
